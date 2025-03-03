@@ -7,7 +7,7 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "showTable")//vi giver tabellen et andet navn, da show er et reserveret ord!
+@Table(name = "showTable")//vi giver tabellen et andet navn, da show er et reserveret ord i MySQL!
 public class Show {
 
     @Id

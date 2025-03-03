@@ -15,6 +15,7 @@ public class Movie {
     private String description;
     private String trailerLink;
     private String reviewLink;
+    @Enumerated(EnumType.STRING) // Gemmer enum som en STRING i databasen
     private Genre genre;
 
     @OneToOne(mappedBy = "movie")

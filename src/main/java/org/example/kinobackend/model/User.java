@@ -13,6 +13,7 @@ public class User {
     @Column(unique = true)
     private String userName;
     private String password;
+    @Enumerated(EnumType.STRING) // Gemmer enum som en STRING i databasen
     private UserRole userRole;
 
     public User() {
