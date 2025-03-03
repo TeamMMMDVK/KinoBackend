@@ -5,6 +5,7 @@ on:
     branches:
       - main
     types: [opened, synchronize, closed]
+  workflow_dispatch:
 
 jobs:
   update-jira:
@@ -22,6 +23,13 @@ jobs:
         run: |
           ISSUE_KEY=$(echo "${{ github.event.pull_request.title }}" | grep -oE '[A-Z]+-[0-9]+')
           echo "JIRA_ISSUE_KEY=$ISSUE_KEY" >> $GITHUB_ENV
+
+      - name: Jira login
+        uses: atlassian/gajira-login@v3.0.0
+        env:
+          JIRA_BASE_URL: ${{ secrets.JIRA_BASE_URL }}
+          JIRA_USER_EMAIL: ${{ secrets.JIRA_USER_EMAIL }}
+          JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
 
       - name: Comment on JIRA Issue
         uses: atlassian/gajira-comment@v3
