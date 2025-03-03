@@ -2,6 +2,8 @@ name: Update JIRA Issue on PR Events
 
 on:
   pull_request:
+    branches:
+      - main
     types: [opened, synchronize, closed]
 
 jobs:
@@ -24,7 +26,7 @@ jobs:
           comment: "Pull request ${{ github.event.pull_request.html_url }} has been updated."
 
       - name: Transition JIRA Issue to Done (on PR Merge)
-        if: github.event.pull_request.merged == true && github.base_ref == 'main'
+        if: github.event.pull_request.merged == true
         uses: atlassian/gajira-transition@v3
         with:
           issue: "${{ env.JIRA_ISSUE_KEY }}"
