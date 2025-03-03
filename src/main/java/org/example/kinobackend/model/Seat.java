@@ -12,8 +12,8 @@ public class Seat {
     private int seatRow;
     private int seatNumber;
     @ManyToOne //mange sæder tilhører præcis en sal
-    @JoinColumn(name = "theaterID", nullable = false)
-    @JsonBackReference //for at undgå problemer med cirkulær JSON-serialisering i child
+    @JoinColumn(name = "theateridfk", referencedColumnName = "theaterID", nullable = false)
+    @JsonBackReference //for at undgå problemer med cirkulær JSON-serialisering (child)
     private Theater theater;
 
     public Seat() {

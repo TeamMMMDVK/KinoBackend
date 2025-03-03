@@ -19,9 +19,12 @@ public class Theater {
     det nemt at kalde alle sæder tilknyttet en sal. Vær dog obs, hvis vi arbejder med store
     mængder data!
     */
-    @OneToMany(mappedBy = "theater",cascade = CascadeType.ALL)
-    @JsonManagedReference //for at undgå problemer med cirkulær JSON-serialisering i parent
+    @OneToMany(mappedBy = "theater")
+    @JsonManagedReference //for at undgå problemer med cirkulær JSON-serialisering (parent)
     private List<Seat> seats = new ArrayList<>();
+    @OneToOne(mappedBy = "theater")
+    @JsonManagedReference
+    private Show show;
 
     public Theater() {
     }
@@ -64,5 +67,13 @@ public class Theater {
 
     public void setSeats(List<Seat> seats) {
         this.seats = seats;
+    }
+
+    public Show getShow() {
+        return show;
+    }
+
+    public void setShow(Show show) {
+        this.show = show;
     }
 }

@@ -1,9 +1,7 @@
 package org.example.kinobackend.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.*;
 
 @Entity(name = "Movie")
 public class Movie {
@@ -18,6 +16,10 @@ public class Movie {
     private String trailerLink;
     private String reviewLink;
     private Genre genre;
+
+    @OneToOne(mappedBy = "movie")
+    @JsonManagedReference
+    private Show show;
 
     public Movie() {
     }
@@ -77,5 +79,13 @@ public class Movie {
 
     public void setGenre(Genre genre) {
         this.genre = genre;
+    }
+
+    public Show getShow() {
+        return show;
+    }
+
+    public void setShow(Show show) {
+        this.show = show;
     }
 }
