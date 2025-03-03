@@ -1,4 +1,4 @@
-name: Update JIRA Issue on PR Events
+name: Update JIRA Issue on PR Events from main
 
 on:
   pull_request:
@@ -9,6 +9,10 @@ on:
 jobs:
   update-jira:
     runs-on: ubuntu-latest
+    env:
+      JIRA_BASE_URL: ${{ secrets.JIRA_BASE_URL }}
+      JIRA_USER_EMAIL: ${{ secrets.JIRA_USER_EMAIL }}
+      JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -24,10 +28,6 @@ jobs:
         with:
           issue: "${{ env.JIRA_ISSUE_KEY }}"
           comment: "Pull request ${{ github.event.pull_request.html_url }} has been updated."
-        env:
-          JIRA_BASE_URL: ${{ secrets.JIRA_BASE_URL }}
-          JIRA_USER_EMAIL: ${{ secrets.JIRA_USER }}
-          JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
 
       - name: Transition JIRA Issue to Done (on PR Merge)
         if: github.event.pull_request.merged == true
@@ -35,7 +35,3 @@ jobs:
         with:
           issue: "${{ env.JIRA_ISSUE_KEY }}"
           transition: "Done"
-        env:
-          JIRA_BASE_URL: ${{ secrets.JIRA_BASE_URL }}
-          JIRA_USER_EMAIL: ${{ secrets.JIRA_USER }}
-          JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
