@@ -27,11 +27,9 @@ jobs:
         uses: atlassian/gajira-comment@v3
         with:
           issue: "${{ env.JIRA_ISSUE_KEY }}"
-          comment: "Pull request ${{ github.event.pull_request.html_url }} has been updated."
 
-      - name: Transition JIRA Issue to Done (on PR Merge)
+      - name: Transition JIRA Issue (on PR Merge)
         if: github.event.pull_request.merged == true
         uses: atlassian/gajira-transition@v3
         with:
           issue: "${{ env.JIRA_ISSUE_KEY }}"
-          transition: "Done"
