@@ -20,7 +20,7 @@ public class Movie {
     private Genre genre;
     @Enumerated(EnumType.STRING) // Gemmer enum som en STRING i databasen
     private AgeRestriction ageRestriction;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "imageidfk", referencedColumnName = "imageID")
     @JsonBackReference //for at undgå problemer med cirkulær JSON-serialisering (child)
     private Image image;
