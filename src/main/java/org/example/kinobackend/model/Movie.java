@@ -33,7 +33,6 @@ public class Movie {
     public Movie() {
     }
 
-
     public int getMovieID() {
         return movieID;
     }
@@ -90,14 +89,6 @@ public class Movie {
         this.genre = genre;
     }
 
-    public Show getShow() {
-        return show;
-    }
-
-    public void setShow(Show show) {
-        this.show = show;
-    }
-
     public AgeRestriction getAgeRestriction() {
         return ageRestriction;
     }
@@ -112,5 +103,13 @@ public class Movie {
 
     public void setImage(Image image) {
         this.image = image;
+    }
+
+    public Show getShow() {
+        return show;
+    }
+
+    public void setShow(Show show) {
+        this.show = show;
     }
 }
