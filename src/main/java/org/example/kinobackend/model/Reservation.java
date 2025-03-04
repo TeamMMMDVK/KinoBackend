@@ -14,6 +14,8 @@ public class Reservation {
     @JoinColumn(name = "customeridfk", referencedColumnName = "customerID", nullable = false)
     private Customer customer;
     private LocalDateTime timeStampReservation;
+    private double totalPrice;
+
 
     public Reservation() {
     }
@@ -40,5 +42,13 @@ public class Reservation {
 
     public void setTimeStampReservation(LocalDateTime timeStampReservation) {
         this.timeStampReservation = timeStampReservation;
+    }
+
+    public double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
     }
 }

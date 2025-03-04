@@ -14,7 +14,7 @@ public class Ticket {
 
     @OneToOne(mappedBy = "ticket")
     @JsonBackReference
-    private ReservationSeat reservationSeat;
+    private BookedSeat bookedSeat;
 
     public Ticket() {
     }
@@ -43,11 +43,11 @@ public class Ticket {
         this.price = price;
     }
 
-    public ReservationSeat getReservationSeat() {
-        return reservationSeat;
+    public BookedSeat getBookedSeat() {
+        return bookedSeat;
     }
 
-    public void setReservationSeat(ReservationSeat reservationSeat) {
-        this.reservationSeat = reservationSeat;
+    public void setBookedSeat(BookedSeat bookedSeat) {
+        this.bookedSeat = bookedSeat;
     }
 }

@@ -15,6 +15,8 @@ public class Seat {
     @JoinColumn(name = "theateridfk", referencedColumnName = "theaterID", nullable = false)
     @JsonBackReference //for at undgå problemer med cirkulær JSON-serialisering (child)
     private Theater theater;
+    @Column(nullable = false)
+    private boolean blocked = false; //Default er sæderne ikke blokeret, men dette kan ændres til true ifm fx renovering
 
     public Seat() {
     }
@@ -49,5 +51,13 @@ public class Seat {
 
     public void setTheater(Theater theater) {
         this.theater = theater;
+    }
+
+    public boolean isBlocked() {
+        return blocked;
+    }
+
+    public void setBlocked(boolean blocked) {
+        this.blocked = blocked;
     }
 }
