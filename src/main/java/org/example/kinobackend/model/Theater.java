@@ -1,4 +1,4 @@
 package org.example.kinobackend.model;
 
-public class test {
+public class Theater {
 }
