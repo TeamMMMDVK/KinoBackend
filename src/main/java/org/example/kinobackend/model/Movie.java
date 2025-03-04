@@ -1,5 +1,6 @@
 package org.example.kinobackend.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
@@ -21,6 +22,7 @@ public class Movie {
     private AgeRestriction ageRestriction;
     @OneToOne
     @JoinColumn(name = "imageidfk", referencedColumnName = "imageID")
+    @JsonBackReference //for at undgå problemer med cirkulær JSON-serialisering (child)
     private Image image;
 
 

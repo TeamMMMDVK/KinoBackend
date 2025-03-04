@@ -1,9 +1,7 @@
 package org.example.kinobackend.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
@@ -16,6 +14,10 @@ public class Image {
     private String name;
     private String image; //Image gemmes og transporteres som 64bit Streng eller noget i den stil...
     private LocalDate saved;
+
+    @OneToOne(mappedBy = "image")
+    @JsonBackReference
+    private Movie movie;
 
     public Image() {
     }
@@ -50,5 +52,13 @@ public class Image {
 
     public void setSaved(LocalDate saved) {
         this.saved = saved;
+    }
+
+    public Movie getMovie() {
+        return movie;
+    }
+
+    public void setMovie(Movie movie) {
+        this.movie = movie;
     }
 }
