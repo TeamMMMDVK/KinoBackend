@@ -17,6 +17,12 @@ public class Movie {
     private String reviewLink;
     @Enumerated(EnumType.STRING) // Gemmer enum som en STRING i databasen
     private Genre genre;
+    @Enumerated(EnumType.STRING) // Gemmer enum som en STRING i databasen
+    private AgeRestriction ageRestriction;
+    @OneToOne
+    @JoinColumn(name = "imageidfk", referencedColumnName = "imageID")
+    private Image image;
+
 
     @OneToOne(mappedBy = "movie")
     @JsonManagedReference
@@ -88,5 +94,21 @@ public class Movie {
 
     public void setShow(Show show) {
         this.show = show;
+    }
+
+    public AgeRestriction getAgeRestriction() {
+        return ageRestriction;
+    }
+
+    public void setAgeRestriction(AgeRestriction ageRestriction) {
+        this.ageRestriction = ageRestriction;
+    }
+
+    public Image getImage() {
+        return image;
+    }
+
+    public void setImage(Image image) {
+        this.image = image;
     }
 }
