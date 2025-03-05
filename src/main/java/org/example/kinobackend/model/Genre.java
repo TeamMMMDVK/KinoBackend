@@ -8,5 +8,6 @@ public enum Genre {
     SCIENCE_FICTION,
     COMEDY,
     DOCUMENTARY,
+    ANIMATION,
     MUSICAL
 }
