@@ -25,10 +25,8 @@ public class Movie {
     private AgeRestriction ageRestriction;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "imageidfk", referencedColumnName = "imageID")
-    @JsonBackReference //for at undgå problemer med cirkulær JSON-serialisering (child)
+    @JsonManagedReference
     private Image image;
-
-
     @OneToMany(mappedBy = "movie")
     @JsonManagedReference
     private List<Show> shows = new ArrayList<>();

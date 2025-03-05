@@ -22,6 +22,7 @@ public class MovieController {
         this.movieService = movieService;
     }
 
+    //Til Postman test af EndPoint
     @GetMapping("/{id}")
     public Movie showSpecificKommune(@PathVariable int id) {
         try {
