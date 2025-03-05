@@ -93,7 +93,7 @@ INSERT INTO reservation (customeridfk, time_stamp_reservation, total_price) VALU
 (1, '2025-03-01 15:00:00', 180.00),
 (2, '2025-03-01 15:00:00', 180.00);
 
-INSERT INTO bookedSeat (seatidfk, showidfk, status, ticketidfk, reservationidfk) VALUES 
+INSERT INTO booked_Seat (seatidfk, showidfk, status, ticketidfk, reservationidfk) VALUES
 (1, 1, 'BOOKED', 1, 1),
 (2, 1, 'BOOKED', 2, 1),
 (8, 2, 'BOOKED', 2, 2),
