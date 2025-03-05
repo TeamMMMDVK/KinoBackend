@@ -4,12 +4,16 @@ package org.example.kinobackend.model;
 
 
 import java.io.Serializable;
+import java.util.Objects;
 
 
 public class BookedSeatID implements Serializable {
     //implementering af Serializable gør det muligt at bruge nøglen som identifikator i Hibernate/JPA
     private int show;
     private int seat;
+
+    public BookedSeatID() {
+    }
 
     public int getShow() {
         return show;

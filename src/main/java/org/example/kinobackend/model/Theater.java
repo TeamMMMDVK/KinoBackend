@@ -22,9 +22,9 @@ public class Theater {
     @OneToMany(mappedBy = "theater")
     @JsonManagedReference //for at undgå problemer med cirkulær JSON-serialisering (parent)
     private List<Seat> seats = new ArrayList<>();
-    @OneToOne(mappedBy = "theater")
+    @OneToMany(mappedBy = "theater", cascade = CascadeType.ALL)
     @JsonManagedReference
-    private Show show;
+    private List<Show> shows = new ArrayList<>();
 
     public Theater() {
     }
@@ -69,11 +69,11 @@ public class Theater {
         this.seats = seats;
     }
 
-    public Show getShow() {
-        return show;
+    public List<Show> getShows() {
+        return shows;
     }
 
-    public void setShow(Show show) {
-        this.show = show;
+    public void setShows(List<Show> shows) {
+        this.shows = shows;
     }
 }

@@ -16,11 +16,11 @@ public class Show {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int showID;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "theateridfk", referencedColumnName = "theaterID", nullable = false)
     @JsonBackReference //for at undgå problemer med cirkulær JSON-serialisering (child)
     private Theater theater;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "movieidfk", referencedColumnName = "movieID", nullable = false)
     @JsonBackReference //for at undgå problemer med cirkulær JSON-serialisering (child)
     private Movie movie;

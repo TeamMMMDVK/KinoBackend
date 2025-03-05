@@ -20,7 +20,7 @@ public class BookedSeat {
     private Seat seat;
     @Enumerated(EnumType.STRING) // Gemmer enum som en STRING i databasen
     private Status status;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "ticketidfk", referencedColumnName = "ticketID")
     @JsonBackReference //for at undgå problemer med cirkulær JSON-serialisering (child)
     private Ticket ticket;

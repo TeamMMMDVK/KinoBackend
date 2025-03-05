@@ -4,6 +4,9 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity(name = "Movie")
 public class Movie {
 
@@ -26,9 +29,9 @@ public class Movie {
     private Image image;
 
 
-    @OneToOne(mappedBy = "movie")
+    @OneToMany(mappedBy = "movie")
     @JsonManagedReference
-    private Show show;
+    private List<Show> shows = new ArrayList<>();
 
     public Movie() {
     }
@@ -105,11 +108,11 @@ public class Movie {
         this.image = image;
     }
 
-    public Show getShow() {
-        return show;
+    public List<Show> getShows() {
+        return shows;
     }
 
-    public void setShow(Show show) {
-        this.show = show;
+    public void setShows(List<Show> shows) {
+        this.shows = shows;
     }
 }

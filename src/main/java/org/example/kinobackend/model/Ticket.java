@@ -3,6 +3,9 @@ package org.example.kinobackend.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 public class Ticket {
 
@@ -12,9 +15,9 @@ public class Ticket {
     private String ticketType;
     private double price;
 
-    @OneToOne(mappedBy = "ticket")
+    @OneToMany(mappedBy = "ticket")
     @JsonBackReference
-    private BookedSeat bookedSeat;
+    private List<BookedSeat> bookedSeats = new ArrayList<>();
 
     public Ticket() {
     }
@@ -43,11 +46,11 @@ public class Ticket {
         this.price = price;
     }
 
-    public BookedSeat getBookedSeat() {
-        return bookedSeat;
+    public List<BookedSeat> getBookedSeats() {
+        return bookedSeats;
     }
 
-    public void setBookedSeat(BookedSeat bookedSeat) {
-        this.bookedSeat = bookedSeat;
+    public void setBookedSeats(List<BookedSeat> bookedSeats) {
+        this.bookedSeats = bookedSeats;
     }
 }
