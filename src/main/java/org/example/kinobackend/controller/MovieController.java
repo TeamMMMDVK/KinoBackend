@@ -30,7 +30,7 @@ public class MovieController {
         } catch (NoSuchElementException e) {
             Movie noMovie = new Movie();
             noMovie.setTitle("Movie not found");
-            return noKommune;
+            return noMovie;
         }
 
     }
