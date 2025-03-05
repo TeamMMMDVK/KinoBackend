@@ -1,8 +1,11 @@
 package org.example.kinobackend.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Reservation {
@@ -15,6 +18,9 @@ public class Reservation {
     private Customer customer;
     private LocalDateTime timeStampReservation;
     private double totalPrice;
+    @OneToMany(mappedBy = "reservation")
+    @JsonManagedReference("reservation-bookedseats")
+    private List<BookedSeat> bookedSeats = new ArrayList<>();
 
 
     public Reservation() {

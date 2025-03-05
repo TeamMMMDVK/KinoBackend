@@ -28,7 +28,7 @@ public class Movie {
     @JsonManagedReference
     private Image image;
     @OneToMany(mappedBy = "movie")
-    @JsonManagedReference
+    @JsonManagedReference("movie-shows")
     private List<Show> shows = new ArrayList<>();
 
     public Movie() {

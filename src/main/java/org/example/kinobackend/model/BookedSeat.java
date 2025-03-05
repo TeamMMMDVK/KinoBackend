@@ -11,7 +11,7 @@ public class BookedSeat {
     @Id
     @ManyToOne //en forestilling kan have mange bookede sæder
     @JoinColumn(name = "showidfk", referencedColumnName = "showID", nullable = false)
-    @JsonBackReference //for at undgå problemer med cirkulær JSON-serialisering (child)
+    @JsonBackReference("show-bookedseats") //for at undgå problemer med cirkulær JSON-serialisering (child)
     private Show show;
     @Id
     @ManyToOne //et sæde kan være booket flere gange til forskellige forestillinger
@@ -22,11 +22,11 @@ public class BookedSeat {
     private Status status;
     @ManyToOne
     @JoinColumn(name = "ticketidfk", referencedColumnName = "ticketID")
-    @JsonBackReference //for at undgå problemer med cirkulær JSON-serialisering (child)
+    @JsonBackReference("ticket-bookedseats") //for at undgå problemer med cirkulær JSON-serialisering (child)
     private Ticket ticket;
     @ManyToOne // en reservation kan have flere forskellige bookede sæder
     @JoinColumn(name = "reservationidfk", referencedColumnName = "reservationID")
-    @JsonBackReference //for at undgå problemer med cirkulær JSON-serialisering (child)
+    @JsonBackReference("reservation-bookedseats") //for at undgå problemer med cirkulær JSON-serialisering (child)
     private Reservation reservation;
 
     public BookedSeat() {
