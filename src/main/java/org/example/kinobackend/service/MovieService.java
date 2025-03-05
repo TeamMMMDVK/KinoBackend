@@ -17,4 +17,7 @@ public class MovieService {
     public Optional<Movie> getMovie(int id) {
        return movieRepository.findById(id);
     }
+    public Movie postMovie(Movie movie) {
+        return movieRepository.save(movie);
+    }
 }

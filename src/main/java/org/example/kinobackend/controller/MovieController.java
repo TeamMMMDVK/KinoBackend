@@ -4,10 +4,7 @@ import org.example.kinobackend.model.Movie;
 import org.example.kinobackend.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -33,7 +30,18 @@ public class MovieController {
             noMovie.setTitle("Movie not found");
             return noMovie;
         }
+    }
 
+    @PostMapping("/create-movie")
+    public Movie postMovie(@RequestBody Movie movie) {
+        Movie savedMovie = movieService.postMovie(movie);
+        try {
+            System.out.println(savedMovie.getMovieID());
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+        return savedMovie;
     }
 
 

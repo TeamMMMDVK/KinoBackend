@@ -14,6 +14,17 @@ public class Image {
     private String name;
     private String image; //Image gemmes og transporteres som 64bit Streng eller noget i den stil...
     private LocalDate saved;
+    @OneToOne
+    @JsonBackReference
+    private Movie movie;
+
+    public Movie getMovie() {
+        return movie;
+    }
+
+    public void setMovie(Movie movie) {
+        this.movie = movie;
+    }
 
     public Image() {
     }
