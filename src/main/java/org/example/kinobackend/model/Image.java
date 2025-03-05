@@ -13,6 +13,9 @@ public class Image {
     private int imageID;
     private String name;
     private String image; //Image gemmes og transporteres som 64bit Streng eller noget i den stil...
+    @OneToOne
+    @JsonBackReference("movie-image")
+    private Movie movie;
     private LocalDate saved;
 
     public Image() {

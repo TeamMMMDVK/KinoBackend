@@ -25,7 +25,7 @@ public class Movie {
     private AgeRestriction ageRestriction;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "imageidfk", referencedColumnName = "imageID")
-    @JsonManagedReference
+    @JsonManagedReference("movie-image")
     private Image image;
     @OneToMany(mappedBy = "movie")
     @JsonManagedReference("movie-shows")
