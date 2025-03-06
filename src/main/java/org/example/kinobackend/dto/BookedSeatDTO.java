@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 
 public class BookedSeatDTO {
 
+    private int seatID;
     private int seatRow;
     private int seatNumber;
     private String theaterName;
@@ -16,7 +17,8 @@ public class BookedSeatDTO {
     private int ticketID;
     private Status status;
 
-    public BookedSeatDTO(int seatRow, int seatNumber, String theaterName, String movieName, int reservationID, int ticketID, Status status) {
+    public BookedSeatDTO(int seatID, int seatRow, int seatNumber, String theaterName, String movieName, int reservationID, int ticketID, Status status, LocalDateTime startTime) {
+        this.seatID = seatID;
         this.seatRow = seatRow;
         this.seatNumber = seatNumber;
         this.theaterName = theaterName;
@@ -24,6 +26,7 @@ public class BookedSeatDTO {
         this.reservationID = reservationID;
         this.ticketID = ticketID;
         this.status = status;
+        this.startTime = startTime;
     }
 
     public int getSeatRow() {
@@ -88,5 +91,13 @@ public class BookedSeatDTO {
 
     public void setStartTime(LocalDateTime startTime) {
         this.startTime = startTime;
+    }
+
+    public int getSeatID() {
+        return seatID;
+    }
+
+    public void setSeatID(int seatID) {
+        this.seatID = seatID;
     }
 }
