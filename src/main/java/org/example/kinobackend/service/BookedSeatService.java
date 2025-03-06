@@ -17,25 +17,25 @@ public class BookedSeatService {
         this.bookedSeatRepository = bookedSeatRepository;
     }
 
-    public List<BookedSeatDTO> getBookedSeatsSpecificShow(int showID) {
+    public List<BookedSeatDTO> getAllSeatsSpecificShowWithStatus(int showID) {
         //her hentes listen fra db
-        List<BookedSeat> bookedSeatsSpecificShow = bookedSeatRepository.findByShow_ShowID(showID);
+        List<BookedSeat> allSeatsSpecificShowWithStatus = bookedSeatRepository.findByShow_ShowID(showID);
         //her laves ny liste til at gemme DTO i og returnere
-        List<BookedSeatDTO> bookedSeatsSpecificShowDTO = new ArrayList<>();
+        List<BookedSeatDTO> allSeatsSpecificShowWithStatusDTO = new ArrayList<>();
 
-        for(BookedSeat b: bookedSeatsSpecificShow) {
-            bookedSeatsSpecificShowDTO.add(new BookedSeatDTO(
+        for(BookedSeat b: allSeatsSpecificShowWithStatus) {
+            allSeatsSpecificShowWithStatusDTO.add(new BookedSeatDTO(
                     b.getSeat().getSeatID(),
                     b.getSeat().getSeatRow(),
                     b.getSeat().getSeatNumber(),
                     b.getSeat().getTheater().getTheaterName(),
                     b.getShow().getMovie().getTitle(),
-                    b.getReservation().getReservationID(),
-                    b.getTicket().getTicketID(),
+                    (b.getReservation() != null) ? b.getReservation().getReservationID() : null,  // Undgå NullPointerException
+                    (b.getTicket() != null) ? b.getTicket().getTicketID() : null,  // Undgå NullPointerException
                     b.getStatus(),
                     b.getShow().getStartTime()));
         }
-        return bookedSeatsSpecificShowDTO;
+        return allSeatsSpecificShowWithStatusDTO;
     }
 
 
