@@ -25,5 +25,10 @@ public class SeatService {
 
     }
 
+    public Seat updateSeat(Seat updatedSeat) {
+        return seatRepository.save(updatedSeat);
+
+    }
+
 
 }
