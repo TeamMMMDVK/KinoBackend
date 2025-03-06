@@ -1,12 +1,12 @@
 USE kinoxp;
 
 -- Indsæt primære entiteter
-INSERT INTO image (name, image, saved) VALUES 
+INSERT INTO Image (name, image, saved) VALUES
 ('image_flow','https://poster.ebillet.dk/FLOW-CITATPLAKAT-2025.large.jpg','2025-03-05'), 
 ('image_A Complete Unknown','https://poster.ebillet.dk/a-complete-unknown-2025.large.jpg','2025-03-05'), 
 ('image_theend','https://poster.ebillet.dk/theend2024.hd.jpg','2025-03-05');
 
-INSERT INTO customer (full_name, email) VALUES 
+INSERT INTO Customer (full_name, email) VALUES
 ('John Doe', 'john@example.com'),
 ('Hans Hansen', 'hans@example.com'),
 ('Ole Olesen', 'ole@example.com'),
@@ -55,3 +55,18 @@ INSERT INTO Ticket (ticketID, ticket_type, showidfk, seatidfk) VALUES
                                                                   (3, 'VIP', 2, 151),     -- Ticket for show 2, seat 151 (VIP)
                                                                   (4, 'VIP', 2, 152);     -- Ticket for show 2, seat 152 (VIP)
 
+UPDATE booked_seat
+SET ticket_id = (SELECT ticketID FROM Ticket WHERE showidfk = 1 AND seatidfk = 1)
+WHERE showidfk = 1 AND seatidfk = 1;
+
+UPDATE booked_seat
+SET ticket_id = (SELECT ticketID FROM Ticket WHERE showidfk = 1 AND seatidfk = 2)
+WHERE showidfk = 1 AND seatidfk = 2;
+
+UPDATE booked_seat
+SET ticket_id = (SELECT ticketID FROM Ticket WHERE showidfk = 2 AND seatidfk = 151)
+WHERE showidfk = 2 AND seatidfk = 151;
+
+UPDATE booked_seat
+SET ticket_id = (SELECT ticketID FROM Ticket WHERE showidfk = 2 AND seatidfk = 152)
+WHERE showidfk = 2 AND seatidfk = 152;
