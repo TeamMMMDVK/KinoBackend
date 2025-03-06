@@ -13,11 +13,11 @@ public class BookedSeatDTO {
     private String theaterName;
     private String movieName;
     private LocalDateTime startTime;
-    private int reservationID;
-    private int ticketID;
+    private Integer reservationID; //ændret fra int til Integer, da kan være null
+    private Integer ticketID; //ændret fra int til Integer, da kan være null
     private Status status;
 
-    public BookedSeatDTO(int seatID, int seatRow, int seatNumber, String theaterName, String movieName, int reservationID, int ticketID, Status status, LocalDateTime startTime) {
+    public BookedSeatDTO(int seatID, int seatRow, int seatNumber, String theaterName, String movieName, Integer reservationID, Integer ticketID, Status status, LocalDateTime startTime) {
         this.seatID = seatID;
         this.seatRow = seatRow;
         this.seatNumber = seatNumber;
@@ -27,6 +27,14 @@ public class BookedSeatDTO {
         this.ticketID = ticketID;
         this.status = status;
         this.startTime = startTime;
+    }
+
+    public int getSeatID() {
+        return seatID;
+    }
+
+    public void setSeatID(int seatID) {
+        this.seatID = seatID;
     }
 
     public int getSeatRow() {
@@ -61,19 +69,27 @@ public class BookedSeatDTO {
         this.movieName = movieName;
     }
 
-    public int getReservationID() {
+    public LocalDateTime getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(LocalDateTime startTime) {
+        this.startTime = startTime;
+    }
+
+    public Integer getReservationID() {
         return reservationID;
     }
 
-    public void setReservationID(int reservationID) {
+    public void setReservationID(Integer reservationID) {
         this.reservationID = reservationID;
     }
 
-    public int getTicketID() {
+    public Integer getTicketID() {
         return ticketID;
     }
 
-    public void setTicketID(int ticketID) {
+    public void setTicketID(Integer ticketID) {
         this.ticketID = ticketID;
     }
 
@@ -83,21 +99,5 @@ public class BookedSeatDTO {
 
     public void setStatus(Status status) {
         this.status = status;
-    }
-
-    public LocalDateTime getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(LocalDateTime startTime) {
-        this.startTime = startTime;
-    }
-
-    public int getSeatID() {
-        return seatID;
-    }
-
-    public void setSeatID(int seatID) {
-        this.seatID = seatID;
     }
 }

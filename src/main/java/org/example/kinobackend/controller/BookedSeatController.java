@@ -22,7 +22,7 @@ public class BookedSeatController {
 
     @GetMapping("/show/{showID}")
     public ResponseEntity<List<BookedSeatDTO>> getAllSeatsSpecificShowWithStatus(@PathVariable int showID) {
-        List<BookedSeatDTO> seatsOverviewSpecificShow = bookedSeatService.getBookedSeatsSpecificShow(showID);
+        List<BookedSeatDTO> seatsOverviewSpecificShow = bookedSeatService.getAllSeatsSpecificShowWithStatus(showID);
         return ResponseEntity.ok(seatsOverviewSpecificShow);
     }
 }
