@@ -46,4 +46,12 @@ public class Ticket {
     public void setBookedSeat(BookedSeat bookedSeat) {
         this.bookedSeat = bookedSeat;
     }
+
+    @Override
+    public String toString() {
+        return "Ticket{" +
+                "ticketID=" + ticketID +
+                ", ticketType='" + ticketType + '\'' +
+                '}';
+    }
 }

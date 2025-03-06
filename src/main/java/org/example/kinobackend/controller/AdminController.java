@@ -28,4 +28,14 @@ public class AdminController {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Access for role " + role + " denied.");
         }
     }
+
+    @GetMapping("/movie/{id}/revenue")                         //get the role from the header of the request
+    public ResponseEntity<?> getTotalRevenueOfMovie(@RequestHeader(value = "Role") String role,
+                                                     @PathVariable int id) {
+        if (securityService.hasRole(role, UserRole.ADMIN)) {
+            return ResponseEntity.ok(adminService.getTotalRevenueOfMovie(id));
+        } else {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Access for role " + role + " denied.");
+        }
+    }
 }
