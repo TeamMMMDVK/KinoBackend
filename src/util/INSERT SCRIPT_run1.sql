@@ -12,18 +12,46 @@ INSERT INTO customer (full_name, email) VALUES
 ('Ole Olesen', 'ole@example.com'),
 ('Jane Smith', 'jane@example.com');
 
-INSERT INTO ticket (ticket_type, price) VALUES 
-('Adult', 100.00), 
-('Student', 80.00), 
-('Child', 50.00);
+-- Insert data into the 'movie' table
+INSERT INTO Movie (movieID, title, duration_min, description, trailer_link, review_link, genre, age_restriction, imageidfk) VALUES
+                                                                                                                            (1, 'Action Movie', 120.5, 'An exciting action-packed movie.', 'http://example.com/trailer1', 'http://example.com/review1', 'ACTION', 'PG_7', 1),
+                                                                                                                            (2, 'Drama Movie', 140.0, 'A touching story of love and loss.', 'http://example.com/trailer2', 'http://example.com/review2', 'DRAMA', 'PG_16', 2);
 
--- Indsæt afhængige entiteter
-INSERT INTO movie (title, genre, duration_min, age_restriction, trailer_link, description, review_link, imageidfk) VALUES 
-('Flow', 'ANIMATION', 84, 'PG_7', 'https://admin.ebillet.dk/trailers/34764.mp4', '"Flow" is a unique, visually beautiful and emotional animation film, which largely lets the animals act and behave as animals do in nature.','https://www.imdb.com/title/tt4772188/ratings/?ref_=tt_ov_rat', 1),
-('A Complete Unknown', 'DRAMA', 141, 'PG_7', 'https://www.imdb.com/video/vi2538325529/?ref_=nv_sr_srsg_2_tt_7_nm_0_in_0_q_a%20complete', 'The true story of one of historys most iconic singer-songwriters.','https://www.imdb.com/title/tt11563598/ratings/?ref_=tt_ov_rat', 2),
-('The End', 'MUSICAL', 148, 'PG_16', 'https://www.youtube.com/watch?v=avvm0e4oNCE', 'A touching and deeply human musical about a family that has survived the end of the world.', 'https://www.imdb.com/title/tt15551346/ratings/?ref_=tt_ov_rat', 3);
+-- Insert data into the 'theater' table
+INSERT INTO Theater (theaterID, theater_name, total_amount_of_rows, seats_per_row) VALUES
+                                                                                 (1, 'Main Theater', 10, 15),
+                                                                                 (2, 'VIP Theater', 5, 10);
 
-INSERT INTO theater (theater_name, total_amount_of_rows, seats_per_row) VALUES 
-('Sal 1', 25, 16), 
-('Sal 2', 20, 12);
+-- Insert data into the 'seat' table
+-- Seats for Main Theater
+INSERT INTO Seat (seatID, seat_row, seat_number, theateridfk, blocked) VALUES
+                                                                         (1, 1, 1, 1, false), (2, 1, 2, 1, false), (3, 1, 3, 1, false), -- More rows for Main Theater ...
+                                                                         (150, 10, 15, 1, false);
+
+-- Seats for VIP Theater
+INSERT INTO Seat (seatID, seat_row, seat_number, theateridfk, blocked) VALUES
+                                                                         (151, 1, 1, 2, false), (152, 1, 2, 2, false), (153, 1, 3, 2, false), -- More rows for VIP Theater ...
+                                                                         (200, 5, 10, 2, false);
+
+-- Insert data into the 'show' table
+INSERT INTO show_table (showID, start_time, theateridfk, movieidfk) VALUES
+                                                                 (1, '2025-03-07 18:00:00', 1, 1), -- Action Movie at Main Theater
+                                                                 (2, '2025-03-07 20:00:00', 2, 2); -- Drama Movie at VIP Theater
+
+-- Insert data into the 'reservation' table
+INSERT INTO Reservation (reservationID, customeridfk, reserved_at) VALUES
+                                                                                (1, 1, '2025-03-07 16:00:00'),
+                                                                                (2, 2, '2025-03-07 17:30:00');
+
+INSERT INTO booked_seat(showidfk, seatidfk, status, reservationidfk, price) VALUES
+                                                                                (1, 1, 'BOOKED', 1, 12.50),  -- Seat 1 booked for show 1 with Reservation 1, price 12.50
+                                                                                (1, 2, 'BOOKED', 1, 12.50),  -- Seat 2 booked for show 1 with Reservation 1, price 12.50
+                                                                                (2, 151, 'BOOKED', 2, 15.00), -- Seat 151 booked for show 2 with Reservation 2, price 15.00
+                                                                                (2, 152, 'BOOKED', 2, 15.00); -- Seat 152 booked for show 2 with Reservation 2, price 15.00
+
+INSERT INTO Ticket (ticketID, ticket_type, showidfk, seatidfk) VALUES
+                                                                  (1, 'Standard', 1, 1),  -- Ticket for show 1, seat 1 (Standard)
+                                                                  (2, 'Standard', 1, 2),  -- Ticket for show 1, seat 2 (Standard)
+                                                                  (3, 'VIP', 2, 151),     -- Ticket for show 2, seat 151 (VIP)
+                                                                  (4, 'VIP', 2, 152);     -- Ticket for show 2, seat 152 (VIP)
 

@@ -14,7 +14,7 @@ public class Reservation {
     @OneToOne   //maybe OneToMany? one customer can have multiple reservations
     @JoinColumn(name = "customeridfk", referencedColumnName = "customerID", nullable = false)
     private Customer customer;
-    private LocalDateTime timeStampReservation;
+    private LocalDateTime reservedAt;
     @OneToMany
     private List<BookedSeat> bookedSeats;
 
@@ -38,12 +38,12 @@ public class Reservation {
         this.customer = customer;
     }
 
-    public LocalDateTime getTimeStampReservation() {
-        return timeStampReservation;
+    public LocalDateTime getReservedAt() {
+        return reservedAt;
     }
 
-    public void setTimeStampReservation(LocalDateTime timeStampReservation) {
-        this.timeStampReservation = timeStampReservation;
+    public void setReservedAt(LocalDateTime reservedAt) {
+        this.reservedAt = reservedAt;
     }
 
     public List<BookedSeat> getBookedSeats() {
