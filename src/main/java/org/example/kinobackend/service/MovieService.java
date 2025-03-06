@@ -20,4 +20,7 @@ public class MovieService {
     public Movie postMovie(Movie movie) {
         return movieRepository.save(movie);
     }
+    public void deleteMovieById(int id) {
+        movieRepository.deleteById(id);
+    }
 }
