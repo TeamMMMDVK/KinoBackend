@@ -1,34 +1,31 @@
-package org.example.kinobackend.model;
+package org.example.kinobackend.dto;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import jakarta.persistence.*;
+import org.example.kinobackend.model.AgeRestriction;
+import org.example.kinobackend.model.Genre;
+import org.example.kinobackend.model.Image;
 
-import java.util.ArrayList;
-import java.util.List;
+public class MovieDTO {
 
-@Entity(name = "Movie")
-public class Movie {
-
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int movieID;
     private String title;
     private double durationMin;
     private String description;
     private String trailerLink;
     private String reviewLink;
-    @Enumerated(EnumType.STRING) // Gemmer enum som en STRING i databasen
     private Genre genre;
-    @Enumerated(EnumType.STRING) // Gemmer enum som en STRING i databasen
     private AgeRestriction ageRestriction;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "imageidfk", referencedColumnName = "imageID")
     private Image image;
-    @OneToMany(mappedBy = "movie")
-    private List<Show> shows = new ArrayList<>();
 
-    public Movie() {
+    public MovieDTO(int movieID, String title, double durationMin, String description, String trailerLink, String reviewLink, Genre genre, AgeRestriction ageRestriction, Image image) {
+        this.movieID = movieID;
+        this.title = title;
+        this.durationMin = durationMin;
+        this.description = description;
+        this.trailerLink = trailerLink;
+        this.reviewLink = reviewLink;
+        this.genre = genre;
+        this.ageRestriction = ageRestriction;
+        this.image = image;
     }
 
     public int getMovieID() {
@@ -101,13 +98,5 @@ public class Movie {
 
     public void setImage(Image image) {
         this.image = image;
-    }
-
-    public List<Show> getShows() {
-        return shows;
-    }
-
-    public void setShows(List<Show> shows) {
-        this.shows = shows;
     }
 }
