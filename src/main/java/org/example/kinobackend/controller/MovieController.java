@@ -1,5 +1,6 @@
 package org.example.kinobackend.controller;
 
+import org.apache.coyote.Response;
 import org.example.kinobackend.model.Movie;
 import org.example.kinobackend.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,15 +35,12 @@ public class MovieController {
     }
     // Create movie
     @PostMapping("/create-movie")
-    public Movie postMovie(@RequestBody Movie movie) {
+    public ResponseEntity<Movie> postMovie(@RequestBody Movie movie) {
         Movie savedMovie = movieService.postMovie(movie);
-        try {
-            System.out.println(savedMovie.getMovieID());
+        if (savedMovie == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
-        catch(Exception e) {
-            e.printStackTrace();
-        }
-        return savedMovie;
+        return ResponseEntity.ok(savedMovie);
     }
     // Edit movie
     @PutMapping("/{id}")
