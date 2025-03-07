@@ -8,7 +8,7 @@ public class Seat {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int seatID;
+    private Integer seatID;
     private int seatRow;
     private int seatNumber;
     @ManyToOne //mange sæder tilhører præcis en sal
@@ -21,11 +21,16 @@ public class Seat {
     public Seat() {
     }
 
-    public int getSeatID() {
+    public Seat(Theater theater) {
+        this.theater = theater;
+    }
+
+
+    public Integer getSeatID() {
         return seatID;
     }
 
-    public void setSeatID(int seatID) {
+    public void setSeatID(Integer seatID) {
         this.seatID = seatID;
     }
 

@@ -1,10 +1,8 @@
 package org.example.kinobackend.model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -13,14 +11,12 @@ public class Reservation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int reservationID;
-    @OneToOne
+    @OneToOne   //maybe OneToMany? one customer can have multiple reservations
     @JoinColumn(name = "customeridfk", referencedColumnName = "customerID", nullable = false)
     private Customer customer;
-    private LocalDateTime timeStampReservation;
-    private double totalPrice;
-    @OneToMany(mappedBy = "reservation")
-    @JsonManagedReference("reservation-bookedseats")
-    private List<BookedSeat> bookedSeats = new ArrayList<>();
+    private LocalDateTime reservedAt;
+    @OneToMany
+    private List<BookedSeat> bookedSeats;
 
 
     public Reservation() {
@@ -42,19 +38,19 @@ public class Reservation {
         this.customer = customer;
     }
 
-    public LocalDateTime getTimeStampReservation() {
-        return timeStampReservation;
+    public LocalDateTime getReservedAt() {
+        return reservedAt;
     }
 
-    public void setTimeStampReservation(LocalDateTime timeStampReservation) {
-        this.timeStampReservation = timeStampReservation;
+    public void setReservedAt(LocalDateTime reservedAt) {
+        this.reservedAt = reservedAt;
     }
 
-    public double getTotalPrice() {
-        return totalPrice;
+    public List<BookedSeat> getBookedSeats() {
+        return bookedSeats;
     }
 
-    public void setTotalPrice(double totalPrice) {
-        this.totalPrice = totalPrice;
+    public void setBookedSeats(List<BookedSeat> bookedSeats) {
+        this.bookedSeats = bookedSeats;
     }
 }

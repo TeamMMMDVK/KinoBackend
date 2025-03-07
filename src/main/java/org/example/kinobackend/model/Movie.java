@@ -10,7 +10,6 @@ import java.util.List;
 @Entity(name = "Movie")
 public class Movie {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int movieID;
@@ -32,6 +31,10 @@ public class Movie {
     private List<Show> shows = new ArrayList<>();
 
     public Movie() {
+    }
+
+    public Movie(String title) {
+        this.title = title;
     }
 
     public int getMovieID() {

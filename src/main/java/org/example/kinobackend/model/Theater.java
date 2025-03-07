@@ -29,6 +29,10 @@ public class Theater {
     public Theater() {
     }
 
+    public Theater(String theaterName) {
+        this.theaterName = theaterName;
+    }
+
     public int getTheaterID() {
         return theaterID;
     }

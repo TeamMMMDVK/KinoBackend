@@ -3,7 +3,7 @@ package org.example.kinobackend.model;
 import jakarta.persistence.*;
 
 
-@Entity
+@Entity(name = "users")//user is a reserved word
 public class User {
 
     @Id
