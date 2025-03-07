@@ -15,7 +15,7 @@ public class Show {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int showID;
+    private Integer showID;
     @ManyToOne
     @JoinColumn(name = "theateridfk", referencedColumnName = "theaterID", nullable = false)
     private Theater theater;
@@ -37,11 +37,16 @@ public class Show {
     public Show() {
     }
 
-    public int getShowID() {
+    public Show(Movie movie, Theater theater) {
+        this.movie = movie;
+        this.theater = theater;
+    }
+
+    public Integer getShowID() {
         return showID;
     }
 
-    public void setShowID(int showID) {
+    public void setShowID(Integer showID) {
         this.showID = showID;
     }
 
