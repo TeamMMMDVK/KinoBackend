@@ -20,10 +20,8 @@ public class Theater {
     mængder data!
     */
     @OneToMany(mappedBy = "theater")
-    @JsonManagedReference //for at undgå problemer med cirkulær JSON-serialisering (parent)
     private List<Seat> seats = new ArrayList<>();
     @OneToMany(mappedBy = "theater", cascade = CascadeType.ALL)
-    @JsonManagedReference
     private List<Show> shows = new ArrayList<>();
 
     public Theater() {
