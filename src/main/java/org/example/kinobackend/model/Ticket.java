@@ -1,32 +1,33 @@
 package org.example.kinobackend.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 public class Ticket {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int ticketID;
+    private Integer ticketID;
     private String ticketType;
-    private double price;
-
-    @OneToMany(mappedBy = "ticket")
-    @JsonBackReference
-    private List<BookedSeat> bookedSeats = new ArrayList<>();
+    @OneToOne
+    @JoinColumns({
+            @JoinColumn(name = "showidfk", referencedColumnName = "showidfk"),
+            @JoinColumn(name = "seatidfk", referencedColumnName = "seatidfk")
+    })
+    private BookedSeat bookedSeat;
 
     public Ticket() {
     }
 
-    public int getTicketID() {
+    public Ticket(BookedSeat bookedSeat) {
+        this.bookedSeat = bookedSeat;
+    }
+
+    public Integer getTicketID() {
         return ticketID;
     }
 
-    public void setTicketID(int ticketID) {
+    public void setTicketID(Integer ticketID) {
         this.ticketID = ticketID;
     }
 
@@ -38,19 +39,19 @@ public class Ticket {
         this.ticketType = ticketType;
     }
 
-    public double getPrice() {
-        return price;
+    public BookedSeat getBookedSeat() {
+        return bookedSeat;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void setBookedSeat(BookedSeat bookedSeat) {
+        this.bookedSeat = bookedSeat;
     }
 
-    public List<BookedSeat> getBookedSeats() {
-        return bookedSeats;
-    }
-
-    public void setBookedSeats(List<BookedSeat> bookedSeats) {
-        this.bookedSeats = bookedSeats;
+    @Override
+    public String toString() {
+        return "Ticket{" +
+                "ticketID=" + ticketID +
+                ", ticketType='" + ticketType + '\'' +
+                '}';
     }
 }
