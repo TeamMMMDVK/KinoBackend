@@ -32,7 +32,6 @@ public class BookedSeatService {
                     b.getShow().getMovie().getTitle(),
                     (b.getReservation() != null) ? b.getReservation().getReservationID() : null,  // Undgå NullPointerException
                     (b.getTicket() != null) ? b.getTicket().getTicketID() : null,  // Undgå NullPointerException
-                    b.getStatus(),
                     b.getShow().getStartTime()));
         }
         return allSeatsSpecificShowWithStatusDTO;
