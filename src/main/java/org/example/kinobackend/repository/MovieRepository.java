@@ -13,7 +13,7 @@ public interface MovieRepository extends JpaRepository<Movie, Integer> {
 
     //JPQL forespørgsel til at finde omsætning pr movie. I sådan en forespørgsel bruger vi
     //Java-entitets navnene (Java Persistence Query Language)
-    @Query("SELECT m.title, SUM(t.price) FROM Movie m " +
+    @Query("SELECT SUM(t.price) FROM Movie m " +
             "JOIN m.shows s " + //vi bruger relationen listen af shows i Movie
             "JOIN s.bookedSeats bs " + //vi bruger relationen listen af bookedSeat gemt under show
             "JOIN bs.ticket t " + //vi bruger relationen ticket i bookedSeat
