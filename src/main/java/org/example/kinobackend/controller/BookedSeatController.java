@@ -21,8 +21,8 @@ public class BookedSeatController {
     }
 
     @GetMapping("/show/{showID}")
-    public ResponseEntity<List<BookedSeatDTO>> getAllSeatsSpecificShowWithStatus(@PathVariable int showID) {
-        List<BookedSeatDTO> seatsOverviewSpecificShow = bookedSeatService.getAllSeatsSpecificShowWithStatus(showID);
+    public ResponseEntity<List<BookedSeatDTO>> getAllBookedSeatsSpecificShow(@PathVariable int showID) {
+        List<BookedSeatDTO> seatsOverviewSpecificShow = bookedSeatService.getAllBookedSeatsSpecificShow(showID);
         return ResponseEntity.ok(seatsOverviewSpecificShow);
     }
 }
