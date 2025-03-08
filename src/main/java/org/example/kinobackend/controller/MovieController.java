@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -28,12 +30,19 @@ public class MovieController {
         return ResponseEntity.ok(requestedMovie);
     }
 
+    //skal hente en liste af Movies, som vises i en given periode, her avendes DTO
+    @GetMapping("/inshow")
+    public ResponseEntity<List<MovieDTO>> listOfMoviesOnShowInGivenPeriod(@RequestParam LocalDateTime startDate, @RequestParam LocalDateTime endDate) {
+        List<MovieDTO> requestedList = movieService.listOfMoviesOnShowInGivenPeriod(startDate, endDate);
+        return ResponseEntity.ok(requestedList);
+    }
+
     //Her skal vi opdatere en movie, derfor skal vi have fat i den rigtige Movie Entity til selve
     //opdateringen, men vi returnerer DTO i visningen
     @PutMapping("/{movieID}")
     public ResponseEntity<MovieDTO> updateMovie(@PathVariable int movieID, @RequestBody Movie movieDetails) {
         Optional<Movie> movieToBeChanged = movieService.getMovie(movieID);
-        if(movieToBeChanged.isPresent()) {
+        if (movieToBeChanged.isPresent()) {
             Movie oprMovie = movieToBeChanged.get();
 
             oprMovie.setTitle(movieDetails.getTitle());
@@ -62,12 +71,10 @@ public class MovieController {
 
 
         } else {
-            throw new EntityNotFoundException("Movie not found with ID: "+movieID);
+            throw new EntityNotFoundException("Movie not found with ID: " + movieID);
         }
 
     }
-
-
 
 
 }

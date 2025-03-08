@@ -9,6 +9,9 @@ import org.example.kinobackend.repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -48,6 +51,30 @@ public class MovieService {
 
     public Movie updateMovie(Movie updatedMovie) {
         return movieRepository.save(updatedMovie);
+
+    }
+
+    public List<MovieDTO> listOfMoviesOnShowInGivenPeriod(LocalDateTime startDate, LocalDateTime endDate) {
+        //Vi henter den rigtige liste med Movies fra DB
+        List<Movie> listOfMovies = movieRepository.findMoviesByShowStartTimeBetween(startDate, endDate);
+        if(listOfMovies.isEmpty()) {
+            throw new EntityNotFoundException("No movies are shown in the requested period from "+startDate +" to "+endDate);        }
+
+        //Vi konverterer til en liste af MovieDTO til at returnere
+        List<MovieDTO> listOfMoviesDTO = new ArrayList<>();
+
+        for(Movie m:listOfMovies){
+            listOfMoviesDTO.add(new MovieDTO(m.getMovieID(),
+                    m.getTitle(),
+                    m.getDurationMin(),
+                    m.getDescription(),
+                    m.getTrailerLink(),
+                    m.getReviewLink(),
+                    m.getGenre(),
+                    m.getAgeRestriction(),
+                    m.getImage()));
+        }
+        return listOfMoviesDTO;
 
     }
 }
