@@ -12,9 +12,11 @@ public class BookedSeatDTO {
     private LocalDateTime startTime;
     private int reservationID;
     private int ticketID;
+    private String ticketType;
+    private double ticketPrice;
 
 
-    public BookedSeatDTO(int seatID, int seatRow, int seatNumber, String theaterName, String movieName, int reservationID, int ticketID, LocalDateTime startTime) {
+    public BookedSeatDTO(int seatID, int seatRow, int seatNumber, String theaterName, String movieName, int reservationID, int ticketID, LocalDateTime startTime, String ticketType, double ticketPrice) {
         this.seatID = seatID;
         this.seatRow = seatRow;
         this.seatNumber = seatNumber;
@@ -23,6 +25,8 @@ public class BookedSeatDTO {
         this.reservationID = reservationID;
         this.ticketID = ticketID;
         this.startTime = startTime;
+        this.ticketPrice = ticketPrice;
+        this.ticketType = ticketType;
     }
 
     public int getSeatID() {
@@ -87,5 +91,21 @@ public class BookedSeatDTO {
 
     public void setTicketID(int ticketID) {
         this.ticketID = ticketID;
+    }
+
+    public String getTicketType() {
+        return ticketType;
+    }
+
+    public void setTicketType(String ticketType) {
+        this.ticketType = ticketType;
+    }
+
+    public double getTicketPrice() {
+        return ticketPrice;
+    }
+
+    public void setTicketPrice(double ticketPrice) {
+        this.ticketPrice = ticketPrice;
     }
 }
