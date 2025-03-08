@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
@@ -22,4 +23,13 @@ public interface MovieRepository extends JpaRepository<Movie, Integer> {
     //for at kunne håndtere null
 
 
+    //JPQL forespørgsel til at finde film der vises (har shows) i en given periode
+    //DISTINCT anvendes for ikke at få den samme Movie med flere gange, hvis den har flere
+    //forestillinger i perioden
+    @Query("SELECT DISTINCT m FROM Movie m JOIN m.shows s WHERE s.startTime BETWEEN :startDate AND :endDate")
+    List<Movie> findMoviesByShowStartTimeBetween(@Param("startDate") LocalDateTime startDate, @Param("endDate") LocalDateTime endDate);
+
 }
+
+
+
