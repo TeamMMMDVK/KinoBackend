@@ -13,7 +13,7 @@ public class Reservation {
     @OneToOne
     @JoinColumn(name = "customeridfk", referencedColumnName = "customerID", nullable = false)
     private Customer customer;
-    private LocalDateTime timeStampReservation;
+    private LocalDateTime reserved_at;
     private double totalPrice;
 
 
@@ -36,12 +36,12 @@ public class Reservation {
         this.customer = customer;
     }
 
-    public LocalDateTime getTimeStampReservation() {
-        return timeStampReservation;
+    public LocalDateTime getReserved_at() {
+        return reserved_at;
     }
 
-    public void setTimeStampReservation(LocalDateTime timeStampReservation) {
-        this.timeStampReservation = timeStampReservation;
+    public void setReserved_at(LocalDateTime reserved_at) {
+        this.reserved_at = reserved_at;
     }
 
     public double getTotalPrice() {

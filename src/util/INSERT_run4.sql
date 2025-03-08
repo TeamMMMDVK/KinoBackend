@@ -35,10 +35,20 @@ INSERT INTO show_table (theateridfk, movieidfk, start_time) VALUES
 (2, 3, '2025-03-16 20:30:00');
 
 -- Indsæt reservation og bookede pladser
-INSERT INTO reservation (customeridfk, time_stamp_reservation, total_price) VALUES 
+INSERT INTO reservation (customeridfk, reserved_at, total_price) VALUES
 (1, '2025-03-01 15:00:00', 180.00),
 (3, '2025-03-03 12:00:00', 180.00),
 (4, '2025-03-01 15:00:00', 250.00),
 (2, '2025-03-02 15:45:00', 200.00);
 
-
+INSERT INTO booked_Seat (seatidfk, showidfk, ticketidfk, reservationidfk) VALUES
+(1, 1,  1, 1),
+(2, 1 , 2, 1),
+(8, 2, 2, 2),
+(9, 2, 1, 2),
+(22, 16,1, 3),
+(23, 16, 3, 3),
+(24, 16, 3, 3),
+(25, 16, 3, 3),
+(305, 20, 1, 4),
+(306, 20, 1, 4);

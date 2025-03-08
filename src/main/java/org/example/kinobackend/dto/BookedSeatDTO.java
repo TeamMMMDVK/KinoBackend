@@ -1,8 +1,5 @@
 package org.example.kinobackend.dto;
 
-import org.example.kinobackend.model.Show;
-import org.example.kinobackend.model.Status;
-
 import java.time.LocalDateTime;
 
 public class BookedSeatDTO {
@@ -13,11 +10,11 @@ public class BookedSeatDTO {
     private String theaterName;
     private String movieName;
     private LocalDateTime startTime;
-    private Integer reservationID; //ændret fra int til Integer, da kan være null
-    private Integer ticketID; //ændret fra int til Integer, da kan være null
-    private Status status;
+    private int reservationID;
+    private int ticketID;
 
-    public BookedSeatDTO(int seatID, int seatRow, int seatNumber, String theaterName, String movieName, Integer reservationID, Integer ticketID, Status status, LocalDateTime startTime) {
+
+    public BookedSeatDTO(int seatID, int seatRow, int seatNumber, String theaterName, String movieName, int reservationID, int ticketID, LocalDateTime startTime) {
         this.seatID = seatID;
         this.seatRow = seatRow;
         this.seatNumber = seatNumber;
@@ -25,7 +22,6 @@ public class BookedSeatDTO {
         this.movieName = movieName;
         this.reservationID = reservationID;
         this.ticketID = ticketID;
-        this.status = status;
         this.startTime = startTime;
     }
 
@@ -77,27 +73,19 @@ public class BookedSeatDTO {
         this.startTime = startTime;
     }
 
-    public Integer getReservationID() {
+    public int getReservationID() {
         return reservationID;
     }
 
-    public void setReservationID(Integer reservationID) {
+    public void setReservationID(int reservationID) {
         this.reservationID = reservationID;
     }
 
-    public Integer getTicketID() {
+    public int getTicketID() {
         return ticketID;
     }
 
-    public void setTicketID(Integer ticketID) {
+    public void setTicketID(int ticketID) {
         this.ticketID = ticketID;
-    }
-
-    public Status getStatus() {
-        return status;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
     }
 }
