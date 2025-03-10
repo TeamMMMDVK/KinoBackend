@@ -11,31 +11,19 @@ public class BookedSeat {
     @Id
     @ManyToOne //en forestilling kan have mange bookede sæder
     @JoinColumn(name = "showidfk", referencedColumnName = "showID", nullable = false)
-    @JsonBackReference //for at undgå problemer med cirkulær JSON-serialisering (child)
     private Show show;
     @Id
     @ManyToOne //et sæde kan være booket flere gange til forskellige forestillinger
     @JoinColumn(name = "seatidfk", referencedColumnName = "seatID",nullable = false)
-    @JsonBackReference //for at undgå problemer med cirkulær JSON-serialisering (child)
     private Seat seat;
-    @Enumerated(EnumType.STRING) // Gemmer enum som en STRING i databasen
-    private Status status;
-    @OneToOne
-    @JoinColumn(name = "ticket_id")
+    @ManyToOne
+    @JoinColumn(name = "ticketidfk", referencedColumnName = "ticketID")
     private Ticket ticket;
     @ManyToOne // en reservation kan have flere forskellige bookede sæder
     @JoinColumn(name = "reservationidfk", referencedColumnName = "reservationID")
-    @JsonBackReference //for at undgå problemer med cirkulær JSON-serialisering (child)
     private Reservation reservation;
-    private double price;
 
     public BookedSeat() {
-    }
-
-    public BookedSeat(Show show, Seat seat, Status status) {
-        this.show = show;
-        this.seat = seat;
-        this.status = status;
     }
 
     public Show getShow() {
@@ -54,14 +42,6 @@ public class BookedSeat {
         this.seat = seat;
     }
 
-    public Status getStatus() {
-        return status;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
-    }
-
     public Ticket getTicket() {
         return ticket;
     }
@@ -77,14 +57,4 @@ public class BookedSeat {
     public void setReservation(Reservation reservation) {
         this.reservation = reservation;
     }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-
 }

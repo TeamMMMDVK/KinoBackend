@@ -18,11 +18,9 @@ public class Show {
     private Integer showID;
     @ManyToOne
     @JoinColumn(name = "theateridfk", referencedColumnName = "theaterID", nullable = false)
-    @JsonBackReference //for at undgå problemer med cirkulær JSON-serialisering (child)
     private Theater theater;
     @ManyToOne
     @JoinColumn(name = "movieidfk", referencedColumnName = "movieID", nullable = false)
-    @JsonBackReference //for at undgå problemer med cirkulær JSON-serialisering (child)
     private Movie movie;
     private LocalDateTime startTime;
 
@@ -34,7 +32,6 @@ public class Show {
      */
     @OneToMany(mappedBy = "show", cascade = CascadeType.ALL, orphanRemoval = true) // hvis vi sletter et show
     //så bliver alle de tilknyttede bookede sæder også slettet
-    @JsonManagedReference // Undgår cirkulær JSON-serialisering (parent)
     private List<BookedSeat> bookedSeats = new ArrayList<>();
 
     public Show() {

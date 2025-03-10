@@ -22,23 +22,23 @@ public class AdminService {
     }
 
 
-    public Integer getTotalNumberOfTickets(int movieID){
-        return ticketRepository.countByBookedSeatShowMovieMovieID(movieID);
-    }
-
-
-    public Double getTotalRevenueOfMovie(Integer movieID){
-        List<BookedSeat> allSoldSeatsForMovie = bookedSeatRepository.findBookedSeatByShowMovieMovieID(movieID);
-        logger.info("amount of sold seats: " + allSoldSeatsForMovie.size());
-        double revenue = 0.0;
-        for(BookedSeat bookedSeat : allSoldSeatsForMovie){
-
-            logger.info(bookedSeat.getTicket() + "");
-            if(bookedSeat.getTicket()!=null){
-                logger.info(bookedSeat.getTicket().getTicketType());
-                revenue += bookedSeat.getPrice();
-            }
-        }
-        return revenue;
-    }
+//    public Integer getTotalNumberOfTickets(int movieID){
+//        return ticketRepository.countByBookedSeatShowMovieMovieID(movieID);
+//    }
+//
+//
+//    public Double getTotalRevenueOfMovie(Integer movieID){
+//        List<BookedSeat> allSoldSeatsForMovie = bookedSeatRepository.findBookedSeatByShowMovieMovieID(movieID);
+//        logger.info("amount of sold seats: " + allSoldSeatsForMovie.size());
+//        double revenue = 0.0;
+//        for(BookedSeat bookedSeat : allSoldSeatsForMovie){
+//
+//            logger.info(bookedSeat.getTicket() + "");
+//            if(bookedSeat.getTicket()!=null){
+//                logger.info(bookedSeat.getTicket().getTicketType());
+//                revenue += bookedSeat.getPrice();
+//            }
+//        }
+//        return revenue;
+//    }
 }
