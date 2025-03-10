@@ -17,6 +17,7 @@ public class Customer {
     Reservation klassen findes der en Customer attribut som FK.
     */
     @OneToOne(mappedBy = "customer")
+    @JsonBackReference
     private Reservation reservation;
 
 
