@@ -9,12 +9,9 @@ public class Ticket {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer ticketID;
     private String ticketType;
-    @OneToOne
-    @JoinColumns({
-            @JoinColumn(name = "showidfk", referencedColumnName = "showidfk"),
-            @JoinColumn(name = "seatidfk", referencedColumnName = "seatidfk")
-    })
-    private BookedSeat bookedSeat;
+    private double price;
+    @OneToMany(mappedBy = "ticket")
+    private List<BookedSeat> bookedSeats = new ArrayList<>();
 
     public Ticket() {
     }
@@ -37,14 +34,6 @@ public class Ticket {
 
     public void setTicketType(String ticketType) {
         this.ticketType = ticketType;
-    }
-
-    public BookedSeat getBookedSeat() {
-        return bookedSeat;
-    }
-
-    public void setBookedSeat(BookedSeat bookedSeat) {
-        this.bookedSeat = bookedSeat;
     }
 
     @Override
