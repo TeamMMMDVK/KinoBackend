@@ -33,6 +33,7 @@ public class MovieController {
     //skal hente en liste af Movies, som vises i en given periode, her avendes DTO
     @GetMapping("/inshow")
     public ResponseEntity<List<MovieDTO>> listOfMoviesOnShowInGivenPeriod(@RequestParam LocalDateTime startDate, @RequestParam LocalDateTime endDate) {
+
         List<MovieDTO> requestedList = movieService.listOfMoviesOnShowInGivenPeriod(startDate, endDate);
         return ResponseEntity.ok(requestedList);
     }
