@@ -1,44 +1,42 @@
 package org.example.kinobackend.service;
 
-import org.example.kinobackend.model.BookedSeat;
+import org.example.kinobackend.exceptions.MovieNotFoundException;
 import org.example.kinobackend.repository.BookedSeatRepository;
-import org.example.kinobackend.repository.TicketRepository;
+import org.example.kinobackend.repository.MovieRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import java.util.List;
 
 @Service
 public class AdminService {
 
     private static final Logger logger = LoggerFactory.getLogger(AdminService.class);
 
-    private final TicketRepository ticketRepository;
+
+    private final MovieRepository movieRepository;
     private final BookedSeatRepository bookedSeatRepository;
 
-    public AdminService(TicketRepository ticketRepository, BookedSeatRepository bookedSeatRepository) {
-        this.ticketRepository = ticketRepository;
+    public AdminService(MovieRepository movieRepository, BookedSeatRepository bookedSeatRepository) {
+        this.movieRepository = movieRepository;
         this.bookedSeatRepository = bookedSeatRepository;
     }
 
 
-//    public Integer getTotalNumberOfTickets(int movieID){
-//        return ticketRepository.countByBookedSeatShowMovieMovieID(movieID);
-//    }
-//
-//
-//    public Double getTotalRevenueOfMovie(Integer movieID){
-//        List<BookedSeat> allSoldSeatsForMovie = bookedSeatRepository.findBookedSeatByShowMovieMovieID(movieID);
-//        logger.info("amount of sold seats: " + allSoldSeatsForMovie.size());
-//        double revenue = 0.0;
-//        for(BookedSeat bookedSeat : allSoldSeatsForMovie){
-//
-//            logger.info(bookedSeat.getTicket() + "");
-//            if(bookedSeat.getTicket()!=null){
-//                logger.info(bookedSeat.getTicket().getTicketType());
-//                revenue += bookedSeat.getPrice();
-//            }
-//        }
-//        return revenue;
-//    }
+    public Integer getTotalNumberOfTickets(int movieID){
+        return bookedSeatRepository.countBookedSeatsByShowMovieMovieID(movieID);
+    }
+
+
+    public Double getTotalRevenueOfMovie(Integer movieID){
+        //Vi tjekker først om filmen eksisterer
+        if (!movieRepository.existsById(movieID)) {
+            logger.info("Checking if the movie exists..");
+            throw new MovieNotFoundException("Movie with id + " + movieID + " not found.");
+        }
+        //vi henter omsætning på filmen. Hvis det er null, så returneres 0.0
+        Double revenue = movieRepository.getRevenueForMovie(movieID);
+        logger.info("Revenue for the movie " + movieID + " is " + revenue);
+        return (revenue != null) ? revenue : 0.0;
+    }
+
 }

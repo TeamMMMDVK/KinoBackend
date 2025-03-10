@@ -19,7 +19,7 @@ public class BookedSeatService {
 
     public List<BookedSeatDTO> getAllBookedSeatsSpecificShow(int showID) {
         //her hentes listen fra db
-        List<BookedSeat> allBookedSeatsSpecificShow = bookedSeatRepository.findByShow_ShowID(showID);
+        List<BookedSeat> allBookedSeatsSpecificShow = bookedSeatRepository.findByShowShowID(showID);
         //her laves ny liste til at gemme DTO i og returnere
         List<BookedSeatDTO> allBookedSeatsSpecificShowDTO = new ArrayList<>();
 

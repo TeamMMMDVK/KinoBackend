@@ -11,6 +11,7 @@ import java.util.List;
 public interface BookedSeatRepository extends JpaRepository<BookedSeat, BookedSeatID> {
 
     //Metodesignatur til at finde alle sæder på en bestemt forestilling
-    List<BookedSeat> findByShow_ShowID(int showID);
+    List<BookedSeat> findByShowShowID(int showID);
+    Integer countBookedSeatsByShowMovieMovieID(int movieID);
 
 }
