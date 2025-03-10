@@ -1,6 +1,7 @@
 package org.example.kinobackend.service;
 
 import org.example.kinobackend.dto.BookedSeatDTO;
+import org.example.kinobackend.exceptions.SeatAreAlreadyBookedException;
 import org.example.kinobackend.model.*;
 import org.example.kinobackend.repository.BookedSeatRepository;
 import org.springframework.stereotype.Service;
@@ -36,18 +37,29 @@ public class BookedSeatService {
     }
 
     public List<BookedSeat> createBookedSeats(List<Integer> seatsIDs, int showID,
-                                              List<Integer> ticketTypeIDs, Reservation reservation){
+                                              List<Integer> ticketTypeIDs, Reservation reservation) {
 
         List<BookedSeat> bookedSeats = new ArrayList<>();
         for (int i = 0; i < seatsIDs.size(); i++) {
             Seat seat = seatService.getSeatById(seatsIDs.get(i));
             Show show = showService.findShowByID(showID);
             Ticket ticket = ticketService.findTicketByID(ticketTypeIDs.get(i));
+
             BookedSeat bookedSeat = new BookedSeat(show, seat, ticket, reservation);
-            bookedSeatRepository.save(bookedSeat);
+
+            if (!checkIfSeatIsAlreadyBooked(seat, show)) {
+                bookedSeatRepository.save(bookedSeat);
+            } else {
+                throw new SeatAreAlreadyBookedException("These seats for the movie "
+                        + show.getMovie().getTitle() + " at " + show.getStartTime() + " are already booked.");
+            }
             bookedSeats.add(bookedSeat);
         }
         return bookedSeats;
+    }
+
+    public boolean checkIfSeatIsAlreadyBooked(Seat seat, Show show) {
+        return bookedSeatRepository.existsBookedSeatBySeatAndShow(seat, show);
     }
 
 

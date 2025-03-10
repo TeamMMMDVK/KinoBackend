@@ -34,11 +34,11 @@ public class BookingService {
         List<BookedSeat> bookedSeats = bookedSeatService.createBookedSeats(reservationDTO.getSeatsIDs(),
                 reservationDTO.getShowID(), reservationDTO.getTicketIDs(), newReservation);
 
+        //prepare the response
         ProcessedReservationDTO responseDTO = reservationService.mapReservationToConfirmedReservationDTO(newReservation);
         responseDTO.setBookedSeats(bookedSeats.stream()
                 .map(bs -> bookedSeatService.mapBookedSeatToBookedSeatDTO(bs))
                 .collect(Collectors.toList()));
-
 
         if (responseDTO.getReservationID() != 0) return responseDTO;
         else throw new ErrorCreatingReservationException("Could not create new reservation of the seats.");

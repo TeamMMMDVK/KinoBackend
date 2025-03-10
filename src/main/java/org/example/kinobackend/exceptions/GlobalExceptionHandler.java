@@ -17,4 +17,9 @@ public class GlobalExceptionHandler {
     public ResponseEntity<String> handleErrorCreatingReservationException(ErrorCreatingReservationException ex) {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(SeatAreAlreadyBookedException.class)
+    public ResponseEntity<String> handleSeatsAreAlreadyBookedException(SeatAreAlreadyBookedException ex) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+    }
 }
