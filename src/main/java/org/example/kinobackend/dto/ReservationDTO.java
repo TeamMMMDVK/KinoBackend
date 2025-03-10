@@ -1,34 +1,27 @@
 package org.example.kinobackend.dto;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
-//Dette er DTO med data, som returneres som bekræftelse til kunden efter booking
 
+//initial reservation creation
 public class ReservationDTO {
 
-    private int reservationID;
     private String customerName;
-    private String email;
-    private LocalDateTime reserved_at;
-    private double totalPrice;
-    private List<BookedSeatDTO> bookedSeats;
+    private String customerEmail;
+    private int showID;
+    private List<Integer> seatsIDs;
+    private List<Integer> ticketIDs;
 
-    public ReservationDTO(int reservationID, String customerName, String email, LocalDateTime reserved_at, double totalPrice, List<BookedSeatDTO> bookedSeats) {
-        this.reservationID = reservationID;
+    public ReservationDTO() {
+    }
+
+    public ReservationDTO(String customerName, String customerEmail, int showID,
+                          List<Integer> seatsIDs, List<Integer> ticketIDs) {
         this.customerName = customerName;
-        this.email = email;
-        this.reserved_at = reserved_at;
-        this.totalPrice = totalPrice;
-        this.bookedSeats = bookedSeats;
-    }
-
-    public int getReservationID() {
-        return reservationID;
-    }
-
-    public void setReservationID(int reservationID) {
-        this.reservationID = reservationID;
+        this.customerEmail = customerEmail;
+        this.showID = showID;
+        this.seatsIDs = seatsIDs;
+        this.ticketIDs = ticketIDs;
     }
 
     public String getCustomerName() {
@@ -39,35 +32,35 @@ public class ReservationDTO {
         this.customerName = customerName;
     }
 
-    public String getEmail() {
-        return email;
+    public String getCustomerEmail() {
+        return customerEmail;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setCustomerEmail(String customerEmail) {
+        this.customerEmail = customerEmail;
     }
 
-    public LocalDateTime getReserved_at() {
-        return reserved_at;
+    public int getShowID() {
+        return showID;
     }
 
-    public void setReserved_at(LocalDateTime reserved_at) {
-        this.reserved_at = reserved_at;
+    public void setShowID(int showID) {
+        this.showID = showID;
     }
 
-    public double getTotalPrice() {
-        return totalPrice;
+    public List<Integer> getTicketIDs() {
+        return ticketIDs;
     }
 
-    public void setTotalPrice(double totalPrice) {
-        this.totalPrice = totalPrice;
+    public void setTicketIDs(List<Integer> ticketIDs) {
+        this.ticketIDs = ticketIDs;
     }
 
-    public List<BookedSeatDTO> getBookedSeats() {
-        return bookedSeats;
+    public List<Integer> getSeatsIDs() {
+        return seatsIDs;
     }
 
-    public void setBookedSeats(List<BookedSeatDTO> bookedSeats) {
-        this.bookedSeats = bookedSeats;
+    public void setSeatsIDs(List<Integer> seatsIDs) {
+        this.seatsIDs = seatsIDs;
     }
 }

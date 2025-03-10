@@ -13,7 +13,7 @@ public class Reservation {
     @OneToOne
     @JoinColumn(name = "customeridfk", referencedColumnName = "customerID", nullable = false)
     private Customer customer;
-    private LocalDateTime reserved_at;
+    private LocalDateTime reservedAt;
     private double totalPrice;
 
 
@@ -36,12 +36,12 @@ public class Reservation {
         this.customer = customer;
     }
 
-    public LocalDateTime getReserved_at() {
-        return reserved_at;
+    public LocalDateTime getReservedAt() {
+        return reservedAt;
     }
 
-    public void setReserved_at(LocalDateTime reserved_at) {
-        this.reserved_at = reserved_at;
+    public void setReservedAt(LocalDateTime reserved_at) {
+        this.reservedAt = reserved_at;
     }
 
     public double getTotalPrice() {

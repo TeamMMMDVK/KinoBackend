@@ -26,6 +26,13 @@ public class BookedSeat {
     public BookedSeat() {
     }
 
+    public BookedSeat(Show show, Seat seat, Ticket ticket, Reservation reservation) {
+        this.show = show;
+        this.seat = seat;
+        this.ticket = ticket;
+        this.reservation = reservation;
+    }
+
     public Show getShow() {
         return show;
     }

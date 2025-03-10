@@ -1,17 +1,14 @@
 package org.example.kinobackend.dto;
 
-import org.example.kinobackend.model.Movie;
-import org.example.kinobackend.model.Theater;
-
 import java.time.LocalDateTime;
 
-public class showDTO {
+public class ShowDTO {
     private int showID;
     private String theaterName;
     private String movieName;
     private LocalDateTime startTime;
 
-    public showDTO(int showID, String theaterName, String movieName, LocalDateTime startTime) {
+    public ShowDTO(int showID, String theaterName, String movieName, LocalDateTime startTime) {
         this.showID = showID;
         this.theaterName = theaterName;
         this.movieName = movieName;
