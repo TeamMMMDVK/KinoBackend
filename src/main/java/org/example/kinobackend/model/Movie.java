@@ -1,5 +1,6 @@
 package org.example.kinobackend.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
@@ -23,8 +24,10 @@ public class Movie {
     private AgeRestriction ageRestriction;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "imageidfk", referencedColumnName = "imageID")
+    @JsonManagedReference
     private Image image;
     @OneToMany(mappedBy = "movie")
+    @JsonManagedReference
     private List<Show> shows = new ArrayList<>();
 
     public Movie() {
