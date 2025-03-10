@@ -6,6 +6,7 @@ public enum Genre {
     ROMANCE,
     ACTION,
     SCIENCE_FICTION,
+    THRILLER,
     COMEDY,
     DOCUMENTARY,
     ANIMATION,
