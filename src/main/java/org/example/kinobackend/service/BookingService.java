@@ -5,11 +5,13 @@ import org.example.kinobackend.dto.ReservationDTO;
 import org.example.kinobackend.exceptions.ErrorCreatingReservationException;
 import org.example.kinobackend.model.*;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@Transactional
 public class BookingService {
 
 
