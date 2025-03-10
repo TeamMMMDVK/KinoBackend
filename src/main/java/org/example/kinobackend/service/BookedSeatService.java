@@ -1,7 +1,7 @@
 package org.example.kinobackend.service;
 
 import org.example.kinobackend.dto.BookedSeatDTO;
-import org.example.kinobackend.model.BookedSeat;
+import org.example.kinobackend.model.*;
 import org.example.kinobackend.repository.BookedSeatRepository;
 import org.springframework.stereotype.Service;
 
@@ -12,9 +12,15 @@ import java.util.List;
 public class BookedSeatService {
 
     private BookedSeatRepository bookedSeatRepository;
+    private final ShowService showService;
+    private final SeatService seatService;
+    private final TicketService ticketService;
 
-    public BookedSeatService(BookedSeatRepository bookedSeatRepository) {
+    public BookedSeatService(BookedSeatRepository bookedSeatRepository, ShowService showService, SeatService seatService, TicketService ticketService) {
         this.bookedSeatRepository = bookedSeatRepository;
+        this.showService = showService;
+        this.seatService = seatService;
+        this.ticketService = ticketService;
     }
 
     public List<BookedSeatDTO> getAllBookedSeatsSpecificShow(int showID) {
@@ -24,20 +30,38 @@ public class BookedSeatService {
         List<BookedSeatDTO> allBookedSeatsSpecificShowDTO = new ArrayList<>();
 
         for (BookedSeat b : allBookedSeatsSpecificShow) {
-            allBookedSeatsSpecificShowDTO.add(new BookedSeatDTO(
-                    b.getSeat().getSeatID(),
-                    b.getSeat().getSeatRow(),
-                    b.getSeat().getSeatNumber(),
-                    b.getSeat().getTheater().getTheaterName(),
-                    b.getShow().getMovie().getTitle(),
-                    b.getReservation().getReservationID(),
-                    b.getTicket().getTicketID(),
-                    b.getShow().getStartTime(),
-                    b.getTicket().getTicketType(),
-                    b.getTicket().getPrice()));
+            allBookedSeatsSpecificShowDTO.add(mapBookedSeatToBookedSeatDTO(b));
         }
         return allBookedSeatsSpecificShowDTO;
     }
 
+    public List<BookedSeat> createBookedSeats(List<Integer> seatsIDs, int showID,
+                                              List<Integer> ticketTypeIDs, Reservation reservation){
 
+        List<BookedSeat> bookedSeats = new ArrayList<>();
+        for (int i = 0; i < seatsIDs.size(); i++) {
+            Seat seat = seatService.getSeatById(seatsIDs.get(i));
+            Show show = showService.findShowByID(showID);
+            Ticket ticket = ticketService.findTicketByID(ticketTypeIDs.get(i));
+            BookedSeat bookedSeat = new BookedSeat(show, seat, ticket, reservation);
+            bookedSeatRepository.save(bookedSeat);
+            bookedSeats.add(bookedSeat);
+        }
+        return bookedSeats;
+    }
+
+
+    public BookedSeatDTO mapBookedSeatToBookedSeatDTO(BookedSeat bookedSeat) {
+        return new BookedSeatDTO(
+                bookedSeat.getSeat().getSeatID(),
+                bookedSeat.getSeat().getSeatRow(),
+                bookedSeat.getSeat().getSeatNumber(),
+                bookedSeat.getSeat().getTheater().getTheaterName(),
+                bookedSeat.getShow().getMovie().getTitle(),
+                bookedSeat.getReservation().getReservationID(),
+                bookedSeat.getTicket().getTicketID(),
+                bookedSeat.getShow().getStartTime(),
+                bookedSeat.getTicket().getTicketType(),
+                bookedSeat.getTicket().getPrice());
+    }
 }
