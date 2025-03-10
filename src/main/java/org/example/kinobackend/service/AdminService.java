@@ -1,6 +1,6 @@
 package org.example.kinobackend.service;
 
-import org.example.kinobackend.exceptions.MovieNotFoundException;
+import org.example.kinobackend.exceptions.EntityNotFoundException;
 import org.example.kinobackend.repository.BookedSeatRepository;
 import org.example.kinobackend.repository.MovieRepository;
 import org.slf4j.Logger;
@@ -31,7 +31,7 @@ public class AdminService {
         //Vi tjekker først om filmen eksisterer
         if (!movieRepository.existsById(movieID)) {
             logger.info("Checking if the movie exists..");
-            throw new MovieNotFoundException("Movie with id + " + movieID + " not found.");
+            throw new EntityNotFoundException("Movie with id + " + movieID + " not found.");
         }
         //vi henter omsætning på filmen. Hvis det er null, så returneres 0.0
         Double revenue = movieRepository.getRevenueForMovie(movieID);
