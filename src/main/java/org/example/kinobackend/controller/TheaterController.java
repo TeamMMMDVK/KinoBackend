@@ -5,12 +5,10 @@ import org.example.kinobackend.dto.SeatDTO;
 import org.example.kinobackend.model.Seat;
 import org.example.kinobackend.service.TheaterService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin("*")
 @RequestMapping("/api/v1/theater")
 public class TheaterController {
 

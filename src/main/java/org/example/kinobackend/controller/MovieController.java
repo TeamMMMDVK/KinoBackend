@@ -14,6 +14,7 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin("*")
 @RequestMapping("/api/v1/movie")
 public class MovieController {
 
