@@ -3,6 +3,7 @@ package org.example.kinobackend.model;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 public class Reservation {
@@ -10,7 +11,7 @@ public class Reservation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int reservationID;
-    @OneToOne
+    @OneToOne   //maybe OneToMany? one customer can have multiple reservations
     @JoinColumn(name = "customeridfk", referencedColumnName = "customerID", nullable = false)
     private Customer customer;
     private LocalDateTime reserved_at;
@@ -44,11 +45,4 @@ public class Reservation {
         this.reserved_at = reserved_at;
     }
 
-    public double getTotalPrice() {
-        return totalPrice;
-    }
-
-    public void setTotalPrice(double totalPrice) {
-        this.totalPrice = totalPrice;
-    }
 }
