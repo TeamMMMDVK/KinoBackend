@@ -19,6 +19,10 @@ public class Customer {
     @OneToOne(mappedBy = "customer")
     private Reservation reservation;
 
+    public Customer(String fullName, String email) {
+        this.fullName = fullName;
+        this.email = email;
+    }
 
     public Customer() {
     }
