@@ -1,5 +1,6 @@
 package org.example.kinobackend.service;
 
+import jakarta.transaction.Transactional;
 import org.example.kinobackend.dto.ReservationDTO;
 import org.example.kinobackend.model.Customer;
 import org.example.kinobackend.repository.CustomerRepository;
@@ -13,7 +14,8 @@ public class CustomerService {
         this.customerRepository = customerRepository;
     }
 
-    public Customer createCustomerFromNewReservation(ReservationDTO reservationDTO){
+    @Transactional
+    public synchronized Customer createCustomerFromNewReservation(ReservationDTO reservationDTO){
         // Vi finder eller opretter customer
         return customerRepository.findByEmail(reservationDTO.getCustomerEmail())
                 .orElseGet(() -> {
