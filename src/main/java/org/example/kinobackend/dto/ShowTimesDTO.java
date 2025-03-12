@@ -6,10 +6,12 @@ public class ShowTimesDTO {
 
     private int showID;
     private LocalDateTime startTime;
+    private int theaterID;
 
-    public ShowTimesDTO(int showID, LocalDateTime startTime) {
+    public ShowTimesDTO(int showID, LocalDateTime startTime, int theaterID) {
         this.showID = showID;
         this.startTime = startTime;
+        this.theaterID = theaterID;
     }
 
     public int getShowID() {
@@ -26,5 +28,13 @@ public class ShowTimesDTO {
 
     public void setStartTime(LocalDateTime startTime) {
         this.startTime = startTime;
+    }
+
+    public int getTheaterID() {
+        return theaterID;
+    }
+
+    public void setTheaterID(int theaterID) {
+        this.theaterID = theaterID;
     }
 }
