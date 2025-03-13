@@ -12,6 +12,7 @@ public class Image {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int imageID;
     private String name;
+    @Lob
     private String image; //Image gemmes og transporteres som 64bit Streng eller noget i den stil...
     private LocalDate saved;
 
