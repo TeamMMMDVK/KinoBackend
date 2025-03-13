@@ -32,6 +32,10 @@ public class MovieService {
 
     }
 
+    public List<Integer> getIdsOfAllMovies(){
+        return movieRepository.findIdsOfAllMovies();
+    }
+
     public Optional<Movie> getMovie(int id) {
        return movieRepository.findById(id);
     }

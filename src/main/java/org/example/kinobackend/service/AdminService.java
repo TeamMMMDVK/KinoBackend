@@ -1,6 +1,8 @@
 package org.example.kinobackend.service;
 
+import org.example.kinobackend.dto.RevenueSalesDTO;
 import org.example.kinobackend.exceptions.EntityNotFoundException;
+import org.example.kinobackend.model.Movie;
 import org.example.kinobackend.repository.BookedSeatRepository;
 import org.example.kinobackend.repository.MovieRepository;
 import org.slf4j.Logger;
@@ -27,7 +29,7 @@ public class AdminService {
     }
 
 
-    public Double getTotalRevenueOfMovie(Integer movieID){
+    public Double getTotalRevenueOfMovie(int movieID){
         //Vi tjekker først om filmen eksisterer
         if (!movieRepository.existsById(movieID)) {
             logger.info("Checking if the movie exists..");
@@ -37,6 +39,14 @@ public class AdminService {
         Double revenue = movieRepository.getRevenueForMovie(movieID);
         logger.info("Revenue for the movie " + movieID + " is " + revenue);
         return (revenue != null) ? revenue : 0.0;
+    }
+
+    public RevenueSalesDTO getSalesAndRevenue(int movieID){
+        Movie movie = movieRepository.findById(movieID).orElseThrow(() -> new EntityNotFoundException("Movie with id + " + movieID + " not found."));
+        RevenueSalesDTO revenueSalesDTO = new RevenueSalesDTO(movieID, movie.getTitle(),
+                getTotalRevenueOfMovie(movieID),
+                getTotalNumberOfTickets(movieID));
+        return revenueSalesDTO;
     }
 
 }

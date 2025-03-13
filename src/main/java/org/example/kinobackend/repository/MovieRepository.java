@@ -12,6 +12,9 @@ import java.util.List;
 @Repository
 public interface MovieRepository extends JpaRepository<Movie, Integer> {
 
+    @Query("SELECT movieID from Movie")
+    List<Integer> findIdsOfAllMovies();
+
     //JPQL forespørgsel til at finde omsætning pr movie. I sådan en forespørgsel bruger vi
     //Java-entitets navnene (Java Persistence Query Language)
     @Query("SELECT SUM(t.price) FROM Movie m " +
