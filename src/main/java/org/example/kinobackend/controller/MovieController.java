@@ -25,6 +25,11 @@ public class MovieController {
         this.movieService = movieService;
     }
 
+    @GetMapping("/all")
+    public ResponseEntity<List<MovieDTO>> getAllMovies() {
+        List<MovieDTO> allMovies = movieService.getAllMovies();
+        return ResponseEntity.ok(allMovies);
+    }
 
     @PostMapping("/create-movie")
     public ResponseEntity<Movie> postMovie(@RequestBody Movie movie) {
