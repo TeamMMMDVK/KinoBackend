@@ -10,10 +10,10 @@ public class Reservation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int reservationID;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "customeridfk", referencedColumnName = "customerID", nullable = false)
     private Customer customer;
-    private LocalDateTime timeStampReservation;
+    private LocalDateTime reservedAt;
     private double totalPrice;
 
 
@@ -36,12 +36,12 @@ public class Reservation {
         this.customer = customer;
     }
 
-    public LocalDateTime getTimeStampReservation() {
-        return timeStampReservation;
+    public LocalDateTime getReservedAt() {
+        return reservedAt;
     }
 
-    public void setTimeStampReservation(LocalDateTime timeStampReservation) {
-        this.timeStampReservation = timeStampReservation;
+    public void setReservedAt(LocalDateTime reserved_at) {
+        this.reservedAt = reserved_at;
     }
 
     public double getTotalPrice() {

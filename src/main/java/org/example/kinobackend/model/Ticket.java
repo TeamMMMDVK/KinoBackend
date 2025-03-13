@@ -16,7 +16,6 @@ public class Ticket {
     private double price;
 
     @OneToMany(mappedBy = "ticket")
-    @JsonBackReference
     private List<BookedSeat> bookedSeats = new ArrayList<>();
 
     public Ticket() {

@@ -3,6 +3,8 @@ package org.example.kinobackend.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 public class Customer {
 
@@ -16,10 +18,13 @@ public class Customer {
     Nedenstående attribut bliver ikke en kolonne i tabellen, men fortæller at i
     Reservation klassen findes der en Customer attribut som FK.
     */
-    @OneToOne(mappedBy = "customer")
-    @JsonBackReference
-    private Reservation reservation;
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Reservation> reservation;
 
+    public Customer(String fullName, String email) {
+        this.fullName = fullName;
+        this.email = email;
+    }
 
     public Customer() {
     }
@@ -48,11 +53,11 @@ public class Customer {
         this.email = email;
     }
 
-    public Reservation getReservation() {
+    public List<Reservation> getReservation() {
         return reservation;
     }
 
-    public void setReservation(Reservation reservation) {
+    public void setReservation(List<Reservation> reservation) {
         this.reservation = reservation;
     }
 }
