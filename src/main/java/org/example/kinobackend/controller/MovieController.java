@@ -1,6 +1,7 @@
 package org.example.kinobackend.controller;
 
 import jakarta.persistence.EntityNotFoundException;
+import org.apache.coyote.Response;
 import org.example.kinobackend.dto.MovieDTO;
 import org.example.kinobackend.model.Movie;
 import org.example.kinobackend.service.MovieService;
@@ -22,6 +23,18 @@ public class MovieController {
 
     public MovieController(MovieService movieService) {
         this.movieService = movieService;
+    }
+
+
+    @PostMapping("/create-movie")
+    public ResponseEntity<Movie> postMovie(@RequestBody Movie movie) {
+        Movie savedMovie = movieService.postMovieEntity(movie);
+        return ResponseEntity.ok(savedMovie);
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteMovie(@PathVariable int id) {
+        Movie movieToDelete = movieService.deleteMovieEntity(id);
+        return ResponseEntity.ok("Movie deleted: \n"+movieToDelete.getTitle()+"("+movieToDelete.getMovieID()+")");
     }
 
     //skal hente en movie til visning i frontend, her anvendes DTO

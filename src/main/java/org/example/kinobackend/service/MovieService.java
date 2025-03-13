@@ -21,6 +21,17 @@ public class MovieService {
         this.movieRepository = movieRepository;
     }
 
+    public Movie postMovieEntity(Movie movie) {
+        return movieRepository.save(movie);
+    }
+    public Movie deleteMovieEntity(int id) {
+        Optional<Movie> movieToDelete = movieRepository.findById(id);
+        Movie mov = movieToDelete.get();
+        movieRepository.deleteById(id);
+        return mov;
+
+    }
+
     public Optional<Movie> getMovie(int id) {
        return movieRepository.findById(id);
     }
