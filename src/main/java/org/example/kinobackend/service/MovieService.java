@@ -21,6 +21,9 @@ public class MovieService {
         this.movieRepository = movieRepository;
     }
 
+    public Movie postMovieEntity(Movie movie) {
+        return movieRepository.save(movie);
+    }
     public Optional<Movie> getMovie(int id) {
        return movieRepository.findById(id);
     }

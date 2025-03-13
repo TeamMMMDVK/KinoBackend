@@ -24,6 +24,13 @@ public class MovieController {
         this.movieService = movieService;
     }
 
+
+    @PostMapping("/create-movie")
+    public ResponseEntity<Movie> postMovie(@RequestBody Movie movie) {
+        Movie savedMovie = movieService.postMovieEntity(movie);
+        return ResponseEntity.ok(savedMovie);
+    }
+
     //skal hente en movie til visning i frontend, her anvendes DTO
     @GetMapping("/{movieID}")
     public ResponseEntity<MovieDTO> getMovieById(@PathVariable int movieID) {
