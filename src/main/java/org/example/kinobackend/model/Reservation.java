@@ -10,7 +10,7 @@ public class Reservation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int reservationID;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "customeridfk", referencedColumnName = "customerID", nullable = false)
     private Customer customer;
     private LocalDateTime reservedAt;
