@@ -20,21 +20,11 @@ public class AdminController {
         this.securityService = securityService;
     }
 
-    @GetMapping("/movie/{id}/sale")                         //get the role from the header of the request
-    public ResponseEntity<?> getTotalNumberOfTickets(@RequestHeader(value = "Role") String role,
+    @GetMapping("/movie/{id}/sales-revenue")                         //get the role from the header of the request
+    public ResponseEntity<?> getSalesAndRevenue(@RequestHeader(value = "Role") String role,
                                                      @PathVariable int id) {
         if (securityService.hasRole(role, UserRole.ADMIN)) {
-            return ResponseEntity.ok(adminService.getTotalNumberOfTickets(id));
-        } else {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Access for role " + role + " denied.");
-        }
-    }
-
-    @GetMapping("/movie/{id}/revenue")                         //get the role from the header of the request
-    public ResponseEntity<?> getTotalRevenueOfMovie(@RequestHeader(value = "Role") String role,
-                                                    @PathVariable int id) {
-        if (securityService.hasRole(role, UserRole.ADMIN)) {
-            return ResponseEntity.ok(adminService.getTotalRevenueOfMovie(id));
+            return ResponseEntity.ok(adminService.getSalesAndRevenue(id));
         } else {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Access for role " + role + " denied.");
         }

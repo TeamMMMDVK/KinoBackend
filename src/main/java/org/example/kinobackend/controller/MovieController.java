@@ -24,6 +24,11 @@ public class MovieController {
         this.movieService = movieService;
     }
 
+    @GetMapping
+    public List<Integer> getIdsOfAllMovies(){
+        return movieService.getIdsOfAllMovies();
+    }
+
     //skal hente en movie til visning i frontend, her anvendes DTO
     @GetMapping("/{movieID}")
     public ResponseEntity<MovieDTO> getMovieById(@PathVariable int movieID) {
