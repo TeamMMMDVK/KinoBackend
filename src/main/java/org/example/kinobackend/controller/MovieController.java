@@ -4,6 +4,7 @@ import jakarta.persistence.EntityNotFoundException;
 import org.apache.coyote.Response;
 import org.example.kinobackend.dto.MovieDTO;
 import org.example.kinobackend.model.Movie;
+import org.example.kinobackend.model.Show;
 import org.example.kinobackend.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
