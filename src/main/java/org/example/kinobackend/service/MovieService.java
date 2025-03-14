@@ -21,6 +21,22 @@ public class MovieService {
         this.movieRepository = movieRepository;
     }
 
+    public List<MovieDTO> getAllMovies() {
+        List<Movie> movies = movieRepository.findAll();
+        return movies.stream()
+                .map(movie -> new MovieDTO(
+                        movie.getMovieID(),
+                        movie.getTitle(),
+                        movie.getDurationMin(),
+                        movie.getDescription(),
+                        movie.getTrailerLink(),
+                        movie.getReviewLink(),
+                        movie.getGenre(),
+                        movie.getAgeRestriction(),
+                        movie.getImage()))
+                .toList();
+    }
+
     public Movie postMovieEntity(Movie movie) {
         return movieRepository.save(movie);
     }
