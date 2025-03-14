@@ -21,7 +21,7 @@ public class ShowController {
         this.showService = showService;
     }
 
-    @GetMapping("/{movieID}")
+    @GetMapping("/movie/{movieID}")
     public ResponseEntity<List<ShowTimesDTO>> findShowsForMovieInSpecificPeriod(@PathVariable int movieID, @RequestParam LocalDateTime startDate, @RequestParam LocalDateTime endDate) {
         return ResponseEntity.ok(showService.findShowsForMovieInSpecificPeriod(movieID,startDate,endDate));
     }
